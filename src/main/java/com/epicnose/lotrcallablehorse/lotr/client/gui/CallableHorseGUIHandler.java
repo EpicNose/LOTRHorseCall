@@ -59,7 +59,11 @@ public class CallableHorseGUIHandler {
                     buttons.add(Horse);
                 }
             } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+                HorseButton Horse = new HorseButton((LOTRGuiMenu) gui,8,0,0, HorseGui.class,"LOTR-召唤载具",45);
+                Horse.xPosition = btmRowLeft + (9 - numTopRowButtons) * (buttonSize + buttonGap);
+                Horse.yPosition = midY + buttonGap / 2;
+                Horse.visible =true;
+                buttons.add(Horse);
             }
 
 

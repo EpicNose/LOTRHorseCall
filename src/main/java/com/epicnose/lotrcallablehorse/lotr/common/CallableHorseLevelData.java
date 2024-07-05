@@ -144,16 +144,16 @@ public class CallableHorseLevelData {
     }
     public static void save() {
         try {
-//            if (needsSave) {
-//                File CallableHorse_dat = CallableHorseLevelData.getCallableHorseDat();
-//                if (!CallableHorse_dat.exists()) {
-//                    CallableHorseLevelData.saveNBTToFile(CallableHorse_dat, new NBTTagCompound());
-//                }
-//                NBTTagCompound levelData = new NBTTagCompound();
-//
-//                CallableHorseLevelData.saveNBTToFile(CallableHorse_dat, levelData);
-//                needsSave = false;
-//            }
+            if (needsSave) {
+                File CallableHorse_dat = CallableHorseLevelData.getCallableHorseDat();
+                if (!CallableHorse_dat.exists()) {
+                    CallableHorseLevelData.saveNBTToFile(CallableHorse_dat, new NBTTagCompound());
+                }
+                NBTTagCompound levelData = new NBTTagCompound();
+
+                CallableHorseLevelData.saveNBTToFile(CallableHorse_dat, levelData);
+                needsSave = false;
+            }
             for (Map.Entry<UUID, PlayerHorseData> e : playerDataMap.entrySet()) {
                 UUID player = e.getKey();
                 PlayerHorseData pd = e.getValue();
