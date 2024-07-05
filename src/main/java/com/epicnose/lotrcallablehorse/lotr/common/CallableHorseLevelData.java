@@ -143,10 +143,10 @@ public class CallableHorseLevelData {
         }
     }
     public static void save() {
-        FMLLog.info("存存存存存存存存存存存存存存存存存存22222222222222222222222222222222");
+//        FMLLog.info("存存存存存存存存存存存存存存存存存存22222222222222222222222222222222");
         try {
             if (needsSave) {
-                FMLLog.info("存存存存存存存存存存存存存存存存存存11111111111111111111111");
+//                FMLLog.info("存存存存存存存存存存存存存存存存存存11111111111111111111111");
                 File CallableHorse_dat = CallableHorseLevelData.getCallableHorseDat();
                 if (!CallableHorse_dat.exists()) {
                     CallableHorseLevelData.saveNBTToFile(CallableHorse_dat, new NBTTagCompound());
@@ -161,10 +161,10 @@ public class CallableHorseLevelData {
                 PlayerHorseData pd = e.getValue();
                 if (pd.needsSave()) {
                     CallableHorseLevelData.saveData(player);
-                    FMLLog.info("tagtagtag");
+//                    FMLLog.info("tagtagtag");
                 }
             }
-            FMLLog.info("存存存存存存存存存存存存存存存存存存333333333333333333333333333");
+//            FMLLog.info("存存存存存存存存存存存存存存存存存存333333333333333333333333333");
             needsSave=false;
 //            if (LOTRSpawnDamping.needsSave) {
 //                LOTRSpawnDamping.saveAll();
