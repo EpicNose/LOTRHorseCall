@@ -94,8 +94,9 @@ public class CommandAddHorse extends CommandBase {
                     Chunk chunk = nearestHorse.worldObj.getChunkFromChunkCoords(MathHelper.floor_double(nearestHorse.posX) >> 4,MathHelper.floor_double(nearestHorse.posZ) >> 4);
                     chunk.removeEntity(nearestHorse);
                     p.addChatMessage(new ChatComponentText("[召之马来]载具登记成功"));
-                    lpd.markDirty();
-                    CallableHorseLevelData.sendPlayerData((EntityPlayerMP) p);
+                CallableHorseLevelData.saveData(p.getUniqueID());
+                CallableHorseLevelData.sendPlayerData((EntityPlayerMP) p); //同步一下信息
+//                    CallableHorseLevelData.sendPlayerData((EntityPlayerMP) p);
 //                    CallableHorseLevelData.getData(sv.ownerUUID).markDirty();
                     return;
                 }

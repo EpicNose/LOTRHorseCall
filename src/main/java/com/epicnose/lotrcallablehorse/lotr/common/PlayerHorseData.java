@@ -61,11 +61,11 @@ public class PlayerHorseData {
         return null;
     }
     public void save(NBTTagCompound playerData) {
-        needsSave = false;
+
         if(horseInfo!=null){
             horseInfo.writeToNBT(playerData);//存储玩家的HorseInfo
         }
-
+        needsSave = false;
 
     }
     public void load(NBTTagCompound playerData) {

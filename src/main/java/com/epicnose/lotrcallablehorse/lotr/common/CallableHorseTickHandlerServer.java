@@ -58,7 +58,7 @@ public class CallableHorseTickHandlerServer {
 //                    FMLLog.info("周期保存");
                 }
                 int playerDataClearingInterval = LOTRConfig.playerDataClearingInterval;
-                playerDataClearingInterval = Math.max(playerDataClearingInterval, 600);
+                playerDataClearingInterval = Math.max(playerDataClearingInterval, 800);
                 if (world.getTotalWorldTime() % playerDataClearingInterval == 0L) {
                     CallableHorseLevelData.saveAndClearUnusedPlayerData();
                 }

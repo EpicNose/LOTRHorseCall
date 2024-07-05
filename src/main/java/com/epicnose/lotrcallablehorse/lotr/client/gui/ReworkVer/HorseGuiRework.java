@@ -88,7 +88,7 @@ public class HorseGuiRework extends LOTRGuiMenuBase {
 //
 //        this.modelHorse.render(null, 0, 0, 0, 0, 0, 0.0625F);
         this.drawCenteredString("MadeBy Epic_Nose",guiLeft,guiTop+230,16777215);
-        this.drawCenteredString("本模组免费公开,禁止将本模组功能用于商业用途！",guiLeft,guiTop+238,16777215);
+        this.drawCenteredString("禁止将本模组功能用于商业用途！",guiLeft,guiTop+238,16777215);
         super.drawScreen(i, j, f);
     }
     public void drawEntity(){
