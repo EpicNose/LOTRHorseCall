@@ -27,7 +27,7 @@ public class lotrcallablehorse
 //    @Mod.Instance(value = "lotrcallablehorse")
 
     public static final String MODID = "lotrcallablehorse";
-    public static final String VERSION = "alpha-1.0.0";
+    public static final String VERSION = "alpha-1.0.1";
     public static CallableHorseTickHandlerServer serverTickHandler;
     public static CallableHorseEventHandler modEventHandler;
     public static CallableHorsePacketHandler packetHandler;
