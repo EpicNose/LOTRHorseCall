@@ -1,21 +1,24 @@
 package com.epicnose.lotrcallablehorse;
 
-import com.epicnose.lotrcallablehorse.lotr.client.CallableHorseClientProxy;
 import com.epicnose.lotrcallablehorse.lotr.common.CallableHorseCommonProxy;
+import com.epicnose.lotrcallablehorse.lotr.common.CallableHorseConfig;
 import com.epicnose.lotrcallablehorse.lotr.common.CallableHorseEventHandler;
+import com.epicnose.lotrcallablehorse.lotr.common.CallableHorseLevelData;
+import com.epicnose.lotrcallablehorse.lotr.common.CallableHorseServerTasks;
 import com.epicnose.lotrcallablehorse.lotr.common.CallableHorseTickHandlerServer;
 import com.epicnose.lotrcallablehorse.lotr.common.commands.CommandAddHorse;
 import com.epicnose.lotrcallablehorse.lotr.common.commands.CommandCallHorse;
+import com.epicnose.lotrcallablehorse.lotr.common.commands.CommandTestMount;
 import com.epicnose.lotrcallablehorse.lotr.common.network.CallableHorsePacketHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import lotr.common.LOTRCommonProxy;
 
 @Mod(modid = "lotrcallablehorse", name = "LOTR CallableHorse",version = lotrcallablehorse.VERSION, dependencies = "after:lotr")
 public class lotrcallablehorse
@@ -27,7 +30,7 @@ public class lotrcallablehorse
 //    @Mod.Instance(value = "lotrcallablehorse")
 
     public static final String MODID = "lotrcallablehorse";
-    public static final String VERSION = "alpha-1.0.1";
+    public static final String VERSION = "alpha-1.1.0";
     public static CallableHorseTickHandlerServer serverTickHandler;
     public static CallableHorseEventHandler modEventHandler;
     public static CallableHorsePacketHandler packetHandler;
@@ -41,6 +44,7 @@ public class lotrcallablehorse
     }
     @Mod.EventHandler
     public void preload(FMLPreInitializationEvent event) {
+        CallableHorseConfig.load(event.getSuggestedConfigurationFile());
         NetworkRegistry.INSTANCE.registerGuiHandler( this, proxy);
         serverTickHandler = new CallableHorseTickHandlerServer();
         modEventHandler = new CallableHorseEventHandler();
@@ -51,6 +55,22 @@ public class lotrcallablehorse
     public void onServerStarting(FMLServerStartingEvent event)  {
         event.registerServerCommand(new CommandAddHorse());
         event.registerServerCommand(new CommandCallHorse());
+        event.registerServerCommand(new CommandTestMount());
+    }
+
+    @Mod.EventHandler
+    public void onServerStarted(FMLServerStartedEvent event) {
+        CallableHorseServerTasks.beginServerSession();
+        CallableHorseLevelData.load();
+    }
+
+    @Mod.EventHandler
+    public void onServerStopping(FMLServerStoppingEvent event) {
+        // Stop accepting network work before the final entity snapshot.
+        CallableHorseServerTasks.endServerSession();
+        CallableHorseEventHandler.recallAllTrackedVehicles();
+        CallableHorseEventHandler.clearTracking();
+        CallableHorseLevelData.resetForServer();
     }
 //    @Mod.EventHandler
 //    public void onServerStarting(FMLServerStartingEvent event) throws NoSuchFieldException, IllegalAccessException {
@@ -65,7 +85,7 @@ public class lotrcallablehorse
 //        buttonListField.setAccessible(true);
 //
 //        // 获取 buttonList 的值
-//        ArrayList<LOTRGuiButtonMenu> buttonList = (ArrayList<LOTRGuiButtonMenu>) buttonListField.get(menu);
+//        ArrayList<?> buttonList = (ArrayList<?>) buttonListField.get(menu);
 ////        protected java.util.List buttonList = new ArrayList();
 //        // 往 buttonList 中添加元素
 ////        buttonList.add("New Button");

@@ -1,8 +1,9 @@
 package com.epicnose.lotrcallablehorse.lotr.common;
 
+import com.epicnose.lotrcallablehorse.lotr.common.network.PacketSingleHorseInfo;
 import cpw.mods.fml.common.network.IGuiHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class CallableHorseCommonProxy implements IGuiHandler {
@@ -26,5 +27,13 @@ public class CallableHorseCommonProxy implements IGuiHandler {
 
     public boolean isSingleplayer() {
         return false;
+    }
+
+    /** Client-side packet callback. Dedicated servers intentionally do nothing. */
+    public void applyPlayerHorseData(NBTTagCompound data) {
+    }
+
+    /** Client-side packet callback. Dedicated servers intentionally do nothing. */
+    public void applyHorseInfo(PacketSingleHorseInfo packet) {
     }
 }
