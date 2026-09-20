@@ -36,7 +36,7 @@ public class CommandAddHorse extends CommandBase {
 
     @Override
     public boolean canCommandSenderUseCommand(ICommandSender sender) {
-        return true;
+        return sender instanceof EntityPlayer;
     }
 
     @Override

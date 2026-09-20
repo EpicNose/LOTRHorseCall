@@ -1,5 +1,6 @@
 package com.epicnose.lotrcallablehorse;
 
+import com.epicnose.lotrcallablehorse.lotr.common.CallableHorseBukkitBridge;
 import com.epicnose.lotrcallablehorse.lotr.common.CallableHorseCommonProxy;
 import com.epicnose.lotrcallablehorse.lotr.common.CallableHorseConfig;
 import com.epicnose.lotrcallablehorse.lotr.common.CallableHorseEventHandler;
@@ -56,12 +57,14 @@ public class lotrcallablehorse
         event.registerServerCommand(new CommandAddHorse());
         event.registerServerCommand(new CommandCallHorse());
         event.registerServerCommand(new CommandTestMount());
+        CallableHorseBukkitBridge.registerPermissions();
     }
 
     @Mod.EventHandler
     public void onServerStarted(FMLServerStartedEvent event) {
         CallableHorseServerTasks.beginServerSession();
         CallableHorseLevelData.load();
+        CallableHorseBukkitBridge.registerPermissions();
     }
 
     @Mod.EventHandler
